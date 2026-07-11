@@ -826,35 +826,84 @@
     .counters .container{grid-template-columns:1fr 1fr;}
   }
 
-  /* ---------- Cursor cat companion ---------- */
+ /* ---------- Cursor cat companion ---------- */
   #cursorCat{
-    position:fixed; top:0; left:0; width:42px; height:32px;
+    position:fixed; top:0; left:0; width:46px; height:36px;
     pointer-events:none; z-index:9998;
-    transform:translate(-50%,-50%);
     will-change:transform;
   }
   #cursorCat svg{width:100%; height:100%; display:block; overflow:visible;}
   #cursorCat.flip svg{transform:scaleX(-1);}
-  #cursorCat .cat-leg{transform-origin:top center; animation:catRun 0.32s linear infinite;}
-  #cursorCat .cat-leg.l2{animation-delay:0.16s;}
-  #cursorCat .cat-leg.l3{animation-delay:0.08s;}
-  #cursorCat .cat-leg.l4{animation-delay:0.24s;}
-  #cursorCat .cat-tail{transform-origin:right center; animation:catTail 0.5s ease-in-out infinite;}
-  #cursorCat.idle .cat-leg, #cursorCat.idle .cat-tail{animation-play-state:paused;}
-  #cursorCat .cat-body{transform-origin:center;}
-  #cursorCat.idle .cat-body{animation:catBreathe 2.2s ease-in-out infinite;}
-  @keyframes catRun{
-    0%,100%{transform:rotate(24deg);}
-    50%{transform:rotate(-24deg);}
+ 
+  #cursorCat .cat-body{transform-origin:50% 70%; animation:catBob 0.3s linear infinite;}
+  #cursorCat.idle .cat-body{animation:catBreathe 2.4s ease-in-out infinite;}
+ 
+  /* diagonal trot: front-left+back-right vs front-right+back-left */
+  #cursorCat .leg-a{transform-origin:top center; animation:legSwingA 0.3s linear infinite;}
+  #cursorCat .leg-b{transform-origin:top center; animation:legSwingB 0.3s linear infinite;}
+  #cursorCat.idle .cat-leg{animation-play-state:paused !important;}
+ 
+  #cursorCat .cat-tail{transform-origin:85% 50%; animation:catTail 0.4s ease-in-out infinite;}
+  #cursorCat.idle .cat-tail{animation:catTailIdle 2.6s ease-in-out infinite;}
+ 
+  #cursorCat .cat-ear{transform-origin:50% 100%; transition:transform 0.2s;}
+  #cursorCat.perked .cat-ear{transform:rotate(0deg) scaleY(1.08);}
+ 
+  #cursorCat .cat-eye{animation:catBlink 4.5s ease-in-out infinite;}
+  #cursorCat .cat-eye.e2{animation-delay:0.05s;}
+ 
+  #cursorCat.pounce .cat-body{animation:catPounce 0.5s cubic-bezier(.3,1.6,.4,1);}
+ 
+  @keyframes legSwingA{
+    0%,100%{transform:rotate(30deg);}
+    50%{transform:rotate(-34deg);}
+  }
+  @keyframes legSwingB{
+    0%,100%{transform:rotate(-34deg);}
+    50%{transform:rotate(30deg);}
+  }
+  @keyframes catBob{
+    0%,100%{transform:translateY(0) rotate(0deg);}
+    25%{transform:translateY(-3.5px) rotate(-1.5deg);}
+    50%{transform:translateY(0) rotate(0deg);}
+    75%{transform:translateY(-3.5px) rotate(1.5deg);}
   }
   @keyframes catTail{
-    0%,100%{transform:rotate(-12deg);}
-    50%{transform:rotate(18deg);}
+    0%,100%{transform:rotate(-18deg) translateY(0);}
+    50%{transform:rotate(14deg) translateY(-2px);}
+  }
+  @keyframes catTailIdle{
+    0%,100%{transform:rotate(-8deg);}
+    50%{transform:rotate(10deg);}
   }
   @keyframes catBreathe{
     0%,100%{transform:scale(1) translateY(0);}
-    50%{transform:scale(1.04) translateY(-1px);}
+    50%{transform:scale(1.035) translateY(-1px);}
   }
-  @media (hover:none){
-    #cursorCat{display:none;}
+  @keyframes catBlink{
+    0%,92%,100%{transform:scaleY(1);}
+    95%{transform:scaleY(0.1);}
+  }
+  @keyframes catPounce{
+    0%{transform:scale(1,1) translateY(0);}
+    30%{transform:scale(1.15,0.82) translateY(2px);}
+    55%{transform:scale(0.88,1.2) translateY(-11px);}
+    80%{transform:scale(1.06,0.94) translateY(1px);}
+    100%{transform:scale(1,1) translateY(0);}
+  }
+ 
+  /* paw print trail */
+  .paw-print{
+    position:fixed; z-index:9997; pointer-events:none;
+    width:7px; height:7px; border-radius:50%;
+    background:#C4661F; opacity:0.32;
+    animation:pawFade 0.9s ease-out forwards;
+  }
+  @keyframes pawFade{
+    0%{opacity:0.32; transform:scale(1);}
+    100%{opacity:0; transform:scale(0.5);}
+  }
+ 
+  @media (max-width:600px){
+    #cursorCat{width:36px; height:28px;}
   }
