@@ -835,18 +835,18 @@
   #cursorCat svg{width:100%; height:100%; display:block; overflow:visible;}
   #cursorCat.flip svg{transform:scaleX(-1);}
  
-  #cursorCat .cat-body{transform-origin:50% 70%; animation:catBob 0.3s linear infinite;}
+  #cursorCat .cat-body{transform-box:fill-box; transform-origin:50% 70%; animation:catBob 0.3s linear infinite;}
   #cursorCat.idle .cat-body{animation:catBreathe 2.4s ease-in-out infinite;}
  
   /* diagonal trot: front-left+back-right vs front-right+back-left */
-  #cursorCat .leg-a{transform-origin:top center; animation:legSwingA 0.3s linear infinite;}
-  #cursorCat .leg-b{transform-origin:top center; animation:legSwingB 0.3s linear infinite;}
+  #cursorCat .leg-a{transform-box:fill-box; transform-origin:top center; animation:legSwingA 0.3s linear infinite;}
+  #cursorCat .leg-b{transform-box:fill-box; transform-origin:top center; animation:legSwingB 0.3s linear infinite;}
   #cursorCat.idle .cat-leg{animation-play-state:paused !important;}
  
-  #cursorCat .cat-tail{transform-origin:85% 50%; animation:catTail 0.4s ease-in-out infinite;}
+  #cursorCat .cat-tail{transform-box:fill-box; transform-origin:85% 50%; animation:catTail 0.4s ease-in-out infinite;}
   #cursorCat.idle .cat-tail{animation:catTailIdle 2.6s ease-in-out infinite;}
  
-  #cursorCat .cat-ear{transform-origin:50% 100%; transition:transform 0.2s;}
+  #cursorCat .cat-ear{transform-box:fill-box; transform-origin:50% 100%; transition:transform 0.2s;}
   #cursorCat.perked .cat-ear{transform:rotate(0deg) scaleY(1.08);}
  
   #cursorCat .cat-eye{animation:catBlink 4.5s ease-in-out infinite;}

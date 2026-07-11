@@ -493,4 +493,3 @@ if(cursorCat){
     if(wandering) pickWanderTarget();
   });
 }
- 
