@@ -826,7 +826,7 @@
     .counters .container{grid-template-columns:1fr 1fr;}
   }
 
- /* ---------- Cursor cat companion ---------- */
+  /* ---------- Cursor cat companion ---------- */
   #cursorCat{
     position:fixed; top:0; left:0; width:46px; height:36px;
     pointer-events:none; z-index:9998;

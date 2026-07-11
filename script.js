@@ -414,12 +414,8 @@ if(cursorCat){
     mouseX = x; mouseY = y;
     wandering = false;
     clearInterval(wanderInterval);
-    cursorCat.classList.remove('idle');
     clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => {
-      cursorCat.classList.add('idle');
-      startWandering();
-    }, 1400);
+    idleTimer = setTimeout(startWandering, 1400);
   }
  
   window.addEventListener('mousemove', (e) => setTarget(e.clientX, e.clientY));
@@ -453,6 +449,10 @@ if(cursorCat){
     catY += dy * (wandering ? 0.045 : 0.14);
  
     const speed = Math.hypot(dx, dy);
+ 
+    // legs/tail run whenever the cat is actually moving — true regardless
+    // of whether it's following the cursor or wandering on its own
+    cursorCat.classList.toggle('idle', speed < 0.6);
  
     if(Math.abs(catX - lastX) > 0.4){
       cursorCat.classList.toggle('flip', catX < lastX);
@@ -493,3 +493,4 @@ if(cursorCat){
     if(wandering) pickWanderTarget();
   });
 }
+ 
